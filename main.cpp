@@ -1,6 +1,53 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
 using namespace std;
-void print(std::string print){cout << print;};
-int main(int argc,char **argv) {
-    print("                  \n            __..                     ..__              \n         .gd$$$$$b                 .$$$$$bp.           \n        d$$$$$$$$$$               $$$$$$$$$$b          \n       g$$$$$$$$$$$$     ___     $$$$$$$$$$$$p         \n      !$$$$$$$$$$$$$.--\'\'   \'\'--.$$$$$$$$$$$$$!        \n      !$$$$$$$$$P^\"               \'-$$$$$$$$$$!        \n       T$$$$$$P\"                     \'-$$$$$$P         \n       !$$$$P\"                          $$$$$!         \n        T$$P                             $$$P          \n         ^$        .             .        $^           \n         :      .d$$             $$b.      :           \n         :   .d$$$$$b           d$$$$$b.   :           \n        :   g$$$$$$$$           $$$$$$$$p   :          \n        :  d$$$$$$$$$b         d$$$$$$$$$b  :          \n       :  !$$$$$$$$$$$         $$$$$$$$$$$!  :         \n       :  $$$$$$$(O)$$b _..._ d$$(O)$$$$$$$  :         \n       :  $$$$$$$$$$P^\"       \"^T$$$$$$$$$$  :         \n        : T$$$$$$$P\"     _._     \"T$$$$$$$P :          \n        : \'$$$$$P       $$$$$       T$$$$$\' :          \n        :  \"$$$P        \"T$P\"        T$$$\"  :          \n         :   T$           :           $P   :           \n         :                :                :           \n          :    \"      _..\' \'.._      \"    :            \n           :   \'.                   .\'   :             \n            '-.                       .-\'              \n               \'-. \'-._  __   _.-\' .-\'                 \n                  '--.._ ___ _..--\'      \n\n /$$$$$$$   /$$$$$$  /$$   /$$ /$$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$$  /$$     /$$ /$$$$$$$  /$$$$$$$$\n| $$__  $$ /$$__  $$| $$$ | $$| $$__  $$ /$$__  $$ /$$__  $$| $$__  $$|  $$   /$$/| $$__  $$|__  $$__/\n| $$  \\ $$| $$  \\ $$| $$$$| $$| $$  \\ $$| $$  \\ $$| $$  \\__/| $$  \\ $$ \\  $$ /$$/ | $$  \\ $$   | $$   \n| $$$$$$$/| $$$$$$$$| $$ $$ $$| $$  | $$| $$$$$$$$| $$      | $$$$$$$/  \\  $$$$/  | $$$$$$$/   | $$   \n| $$____/ | $$__  $$| $$  $$$$| $$  | $$| $$__  $$| $$      | $$__  $$   \\  $$/   | $$____/    | $$   \n| $$      | $$  | $$| $$\\  $$$| $$  | $$| $$  | $$| $$    $$| $$  \\ $$    | $$    | $$         | $$   \n| $$      | $$  | $$| $$ \\  $$| $$$$$$$/| $$  | $$|  $$$$$$/| $$  | $$    | $$    | $$         | $$   \n|__/      |__/  |__/|__/  \\__/|_______/ |__/  |__/ \\______/ |__/  |__/    |__/    |__/         |__/   \n                                                                                                      \n                                                                                                      \n                                                                                                                                                      \n");
+void print(string print){cout << print;};
+string inputfile;string outputfile;string seedfile;
+void generate(string outputfilename){
+  ofstream opf;
+  opf.open(outputfilename);
+  opf << "test1";
+  opf.close();
+};
+void encrypt(string inputfile,string outputfile,string seedfile){};
+int main(int argc, char *argv[]) {
+  vector<string> args{argv, argv + argc};
+  if (args[1] == "-g"){
+    generate(args[2]);
+  } else if (args[1] == "-e") {
+    if (args[2] == "-i" || "-o" || "-s") {//start if/else chain
+      if (args[2] == "-i") {//i
+        inputfile = args[3];
+        if (args[4] == "-o"){//i o
+          outputfile = args[5];
+          seedfile = args[7];
+        } else if (args[4] == "-s") { //i s
+          outputfile = args[7];
+          seedfile = args[5];
+        }
+      } else if (args[2] == "-o") {// o
+        outputfile = args[3];
+        if (args[4] == "-i"){//o i
+          inputfile = args[5];
+          seedfile = args[7];
+        } else if (args[4] == "-s") {//o s
+          inputfile = args[7];
+          seedfile = args[5];
+        } 
+      }else if (args[2] == "-o") {//s
+        seedfile = args[3];
+        if (args[4] == "-i"){//s i
+          inputfile = args[5];
+          outputfile = args[7];
+        } else if (args[4] == "-o") {//s o
+          inputfile = args[7];
+          outputfile = args[5];
+        }
+      };
+    encrypt(inputfile,outputfile,seedfile);
+    } else {
+      cout << "you either put an invalid option or you put nothing or oy tried to use -g in this!";
+    }
+  }
 }
