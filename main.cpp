@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+//
 using namespace std;
 void print(string print){cout << print;};
 string inputfile;string outputfile;string seedfile;
